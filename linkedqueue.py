@@ -37,19 +37,19 @@ class LinkedQueue:
         elif self._back is self._front:
             temp = self._front
             self._front = self._back = None
-            return temp
+            return temp.get_value()
 
         # Multiple items in queue
         else:
             temp = self._front
             self._front = self._front.next
-            return temp
+            return temp.get_value()
 
     def peek_front(self):
         """Look at the front node"""
 
         if self._front:
-            return self._front.value
+            return self._front.get_value()
         else:
             return None
 
@@ -59,11 +59,3 @@ class LinkedQueue:
         if self._front is None:
             return True
         return False
-
-    def get_front(self):
-        """Returns the front node"""
-        return self._front
-
-    def get_back(self):
-        """Returns the back node"""
-        return self._back

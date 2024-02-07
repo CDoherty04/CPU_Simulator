@@ -3,7 +3,7 @@ Author: Charlie Doherty
 KUID: 3115329
 Date: 2/06/24
 Lab: 02
-Last modified: 02/06/24
+Last modified: 02/07/24
 Purpose: Create linked lists to simulate the processes of the cpu
 """
 import cpuscheduler
@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
                 app = process.Process(command[1])
                 scheduler.add_process(app)
-                print(command[1], "was added to the queue")
+                print(f"\"{command[1]}\" was added to the queue")
 
             case "CALL":
                 """The process at the front of the queue gets some CPU time and calls a function. 
@@ -50,10 +50,12 @@ if __name__ == "__main__":
                 else:
                     func = function.Function(command[1], False)
 
-                print(f"{scheduler.get_process_queue().get_front().get_value().get_name()} called the "
-                      f"function \"{command[1]}\"")
-
                 scheduler.give_cpu_time(func)
 
-        # print(scheduler.get_process_queue().get_front().get_value())
-        # print(scheduler.get_process_queue().get_back().get_value())
+            case "RETURN":
+                """The process at the front of the queue has the function at the top of its call-stack return. 
+                If the process has any functions left on the call-stack, put it at the back of the queue. 
+                Otherwise, if main returns, simply remove it. Display a message indicating the process ending."""
+
+                # Pops the front process' top call
+                scheduler.return_next_function()

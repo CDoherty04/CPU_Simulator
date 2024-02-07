@@ -19,8 +19,10 @@ class Process:
         self._call_stack.push(call)
 
     def return_function(self):
-        """Returns a function and removes from the call stack"""
-        pass
+        """Returns a function by popping from the call stack"""
+        name = self._call_stack.peek()
+        self._call_stack.pop()
+        return name
 
     def raise_exception(self):
         """Pops calls off the process' call stack until either a function that handles the exception is reached or
