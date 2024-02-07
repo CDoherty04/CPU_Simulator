@@ -8,11 +8,11 @@ class CPUScheduler:
     """
 
     def __init__(self):
-        self.process_queue = linked_queue.Linked_Queue()
+        self.process_queue = linkedqueue.LinkedQueue()
 
     def add_process(self, process):
         """Adds a process to process_queue"""
-        pass
+        self.process_queue.enqueue(process)
 
     def move_to_back(self):
         """Moves a process to the back of the queue"""

@@ -3,6 +3,3 @@ class Function:
     def __init__(self, name):
         self.name = name
         self.can_handle_exceptions = False
-
-    def __repr__(self):
-        return f"function.Function({self.name})"

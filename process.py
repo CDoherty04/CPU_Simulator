@@ -1,3 +1,4 @@
+import function
 import stack
 
 
@@ -10,10 +11,11 @@ class Process:
     def __init__(self, name):
         self.name = name
         self.call_stack = stack.Stack()
+        self.add_call(function.Function("main"))
 
-    def add_call(self):
+    def add_call(self, func):
         """Add a function to the call stack"""
-        pass
+        self.call_stack.push(func)
 
     def return_function(self):
         """Returns a function and removes from the call stack"""
