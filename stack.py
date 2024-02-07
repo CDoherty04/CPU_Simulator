@@ -2,9 +2,10 @@ from node import Node
 
 
 class Stack:
-    """Node based implementation of a stack"""
+    """Node-based LIFO data structure"""
 
     def __init__(self):
+        """Initializes the stack as empty"""
         self._top = None
 
     def push(self, entry):
@@ -46,3 +47,7 @@ class Stack:
         if self._top:
             return False
         return True
+
+    def get_top(self):
+        """Returns the top node"""
+        return self._top

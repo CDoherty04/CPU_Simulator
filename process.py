@@ -9,13 +9,14 @@ class Process:
     """
 
     def __init__(self, name):
-        self.name = name
-        self.call_stack = stack.Stack()
-        self.add_call(function.Function("main"))
+        """Initializes the name from input and creates a call stack with a main function"""
+        self._name = name
+        self._call_stack = stack.Stack()
+        self.add_call(function.Function("main", False))
 
-    def add_call(self, func):
+    def add_call(self, call):
         """Add a function to the call stack"""
-        self.call_stack.push(func)
+        self._call_stack.push(call)
 
     def return_function(self):
         """Returns a function and removes from the call stack"""
@@ -25,3 +26,11 @@ class Process:
         """Pops calls off the process' call stack until either a function that handles the exception is reached or
         main is popped off, ending the process"""
         pass
+
+    def get_name(self):
+        """Returns the call stack"""
+        return self._name
+
+    def get_call_stack(self):
+        """Returns the call stack"""
+        return self._call_stack

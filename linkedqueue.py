@@ -2,8 +2,10 @@ from node import Node
 
 
 class LinkedQueue:
+    """Node-based FIFO Data structure"""
 
     def __init__(self):
+        """Initializes the queue as empty"""
         self._front = self._back = None
 
     def enqueue(self, entry):
@@ -57,3 +59,11 @@ class LinkedQueue:
         if self._front is None:
             return True
         return False
+
+    def get_front(self):
+        """Returns the front node"""
+        return self._front
+
+    def get_back(self):
+        """Returns the back node"""
+        return self._back
