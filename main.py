@@ -15,9 +15,10 @@ def get_calls():
     with open(file_name, "r") as file:
         lines = file.readlines()
 
-    lines = [line.strip for line in lines]
+    lines = [line.strip() for line in lines]
     return lines
 
 
 if __name__ == "__main__":
     calls = get_calls()
+    print(calls)
