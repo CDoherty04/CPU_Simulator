@@ -41,8 +41,17 @@ def returns(scheduler):
     If the process has any functions left on the call-stack, put it at the back of the queue.
     Otherwise, if main returns, simply remove it. Display a message indicating the process ending."""
 
-    # Pops the front process' top call
-    scheduler.return_next_function()
+    # If the function being returned is NOT "main" end the top call
+    if scheduler.process_queue.peek_front().get_call_stack().peek().get_name() != "main":
+        print(f"{scheduler.process_queue.peek_front().get_name()} returned "
+              f"\"{scheduler.process_queue.peek_front().get_call_stack().peek().get_name()}\"")
+        scheduler.process_queue.peek_front().return_function()
+
+    # Otherwise return main and end the process
+    else:
+        print(f"{scheduler.process_queue.peek_front().get_name()} returned \"main\"")
+        print(f"The \"{scheduler.process_queue.peek_front().get_name()}\" process has ended")
+        scheduler.process_queue.dequeue()
 
 
 def raises(scheduler):
@@ -54,7 +63,6 @@ def raises(scheduler):
     When an exception is raised print a message indicating so, and print messages for all functions that
     are popped because they didn't handle the exception. Finally print a message with the end result of the
     raised exception, again either the process ending or it being handled and placed to the back of the queue."""
-    pass
 
 
 class Executive:
