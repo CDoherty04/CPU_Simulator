@@ -6,6 +6,7 @@ class Stack:
 
     def __init__(self):
         """Initializes the stack as empty"""
+
         self._top = None
 
     def push(self, entry):

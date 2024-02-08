@@ -6,6 +6,7 @@ class LinkedQueue:
 
     def __init__(self):
         """Initializes the queue as empty"""
+
         self._front = self._back = None
 
     def enqueue(self, entry):
