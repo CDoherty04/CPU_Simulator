@@ -25,7 +25,7 @@ class Stack:
         """Looks at, but doesn't interact with, the top"""
 
         if self._top:
-            return self._top.get_value()
+            return self._top.value
         return None
 
     def pop(self):
@@ -34,11 +34,11 @@ class Stack:
         if self.is_empty():
             raise RuntimeError("Stack already Empty")
         elif self._top.next is None:
-            temp = self._top.get_value()
+            temp = self._top.value
             self._top = None
             return temp
         else:
-            temp = self._top.get_value()
+            temp = self._top.value
             self._top = self._top.next
             return temp
 
