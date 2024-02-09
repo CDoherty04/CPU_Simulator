@@ -28,9 +28,12 @@ def calls(scheduler, name, exception):
     Print to the screen indicating which process called the function and the name of the function."""
 
     # Create a function with command[1] being the name and command[2] being exception handling boolean
-    if exception == "yes":
+    if exception.lower() == "yes":
         func = function.Function(name, True)
+    elif exception.lower() == "no":
+        func = function.Function(name, False)
     else:
+        print("The exception segment of the CALL command is not valid, defaulting to \"no\"")
         func = function.Function(name, False)
 
     scheduler.give_cpu_time(func)
@@ -85,11 +88,11 @@ class Executive:
     def run(self):
         """Acts as the main function"""
 
-        print()
-
         scheduler = cpuscheduler.CPUScheduler()
         for command in self.commands:
             command = command.split(" ")
+
+            print()
 
             match command[0]:
                 case "START":
@@ -103,3 +106,6 @@ class Executive:
 
                 case "RAISE":
                     raises(scheduler)
+
+                case _:
+                    print("Nonexistent command found, skipping")
