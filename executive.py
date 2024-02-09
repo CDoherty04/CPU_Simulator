@@ -65,28 +65,13 @@ def raises(scheduler):
     raised exception, again either the process ending or it being handled and placed to the back of the queue."""
 
     print(f"\"{scheduler.process_queue.peek_front().get_name()}\" raised an exception")
-    while True:
 
-        front_process = scheduler.process_queue.peek_front()
-        call_stack = front_process.get_call_stack()
-
-        # If main is reached end the process entirely
-        if call_stack.peek().get_name() == "main":
-            print(f"\"main\" could not handle the exception")
-            print(f"The \"{front_process.get_name()}\" process has ended")
-            scheduler.process_queue.dequeue()
-            break
-
-        # If it's not main and can't handle exceptions, pop the call and continue
-        elif not call_stack.peek().can_handle_exceptions():
-            print(f"\"{call_stack.peek().get_name()}\" could not handle the exception, and has ended")
-            call_stack.pop()
-
-        # Otherwise it isn't main and can handle exceptions, place at back of queue
-        else:
-            print(f"\"{call_stack.peek().get_name()}\" handled the exception")
-            scheduler.move_to_back()
-            break
+    front_process = scheduler.process_queue.peek_front()
+    handled = front_process.raise_exception()
+    if handled:
+        scheduler.move_to_back()
+    else:
+        scheduler.process_queue.dequeue()
 
 
 class Executive:
@@ -94,6 +79,7 @@ class Executive:
 
     def __init__(self, file_name):
         """Takes the file and creates a list of commands"""
+
         self.commands = get_calls(file_name)
 
     def run(self):

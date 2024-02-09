@@ -3,7 +3,7 @@ Author: Charlie Doherty
 KUID: 3115329
 Date: 2/06/24
 Lab: 02
-Last modified: 02/07/24
+Last modified: 02/08/24
 Purpose: Create linked lists to simulate the processes of the cpu
 """
 from executive import Executive

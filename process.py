@@ -29,9 +29,28 @@ class Process:
 
     def raise_exception(self):
         """Pops calls off the process' call stack until either a function that handles the exception is reached or
-        main is popped off, ending the process"""
+        main is popped off, ending the process
 
-        pass
+        Returns False to remove the process from the queue
+        Returns True to move the process to the back of the queue"""
+
+        while True:
+
+            # If main is reached end the process entirely
+            if self._call_stack.peek().get_name() == "main":
+                print(f"\"main\" could not handle the exception")
+                print(f"The \"{self._name}\" process has ended")
+                return False
+
+            # If it's not main and can't handle exceptions, pop the call and continue
+            elif not self._call_stack.peek().can_handle_exceptions():
+                print(f"\"{self._call_stack.peek().get_name()}\" could not handle the exception, and has ended")
+                self._call_stack.pop()
+
+            # Otherwise it isn't main and can handle exceptions, place at back of queue
+            else:
+                print(f"\"{self._call_stack.peek().get_name()}\" handled the exception")
+                return True
 
     def get_name(self):
         """Returns the call stack"""
